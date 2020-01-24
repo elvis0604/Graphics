@@ -9,11 +9,8 @@
 
 int main()
 {
-	string option;
-	cout << "Enter option and data: ";
-	cin >> option;
-	int selected_option = Option(option);
-	cout << selected_option << endl;
+	Option();
+
 	return 0;
 }
 

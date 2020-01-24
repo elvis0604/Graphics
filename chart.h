@@ -9,14 +9,17 @@
 #define CHART_H_
 
 #include <string>
+#include <fstream>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int Option(string option);
-void SetColor(float red, float green, float blue);
-void DrawPoint(int size, int x, int y);
-void DrawLine(int width, int x1, int y1, int x2, int y2);
+void Option();
+void ChartFormatPoint(int n, int space, vector<int> arr, ofstream& ofile);
 
+void SetColor(float red, float green, float blue, ofstream& ofile);
+int LinearInterpolation(int x, int low, int high);
 
 
 #endif /* CHART_H_ */
