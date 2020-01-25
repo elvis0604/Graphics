@@ -22,13 +22,12 @@ draw_line 1 384 10 384 16
 draw_line 1 430 10 430 16
 draw_line 1 476 10 476 16
 set_color 0.5 1 0.5
-draw_point 6 62 38
-draw_point 6 108 49
-draw_point 6 154 71
-draw_point 6 200 104
-draw_point 6 246 159
-draw_point 6 292 247
-draw_point 6 338 390
-draw_point 6 384 478
-draw_point 6 430 478
-draw_point 6 476 478
+draw_line 6 62 38 108 49
+draw_line 6 108 49 154 71
+draw_line 6 154 71 200 104
+draw_line 6 200 104 246 159
+draw_line 6 246 159 292 247
+draw_line 6 292 247 338 390
+draw_line 6 338 390 384 478
+draw_line 6 384 478 430 478
+draw_line 6 430 478 476 478

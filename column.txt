@@ -21,14 +21,14 @@ draw_line 1 338 10 338 16
 draw_line 1 384 10 384 16
 draw_line 1 430 10 430 16
 draw_line 1 476 10 476 16
-set_color 0.5 1 0.5
-draw_point 6 62 38
-draw_point 6 108 49
-draw_point 6 154 71
-draw_point 6 200 104
-draw_point 6 246 159
-draw_point 6 292 247
-draw_point 6 338 390
-draw_point 6 384 478
-draw_point 6 430 478
-draw_point 6 476 478
+set_color 1 0 0
+draw_polygon 4 51 38 73 38 73 16 51 16 
+draw_polygon 4 97 49 119 49 119 16 97 16 
+draw_polygon 4 143 71 165 71 165 16 143 16 
+draw_polygon 4 189 104 211 104 211 16 189 16 
+draw_polygon 4 235 159 257 159 257 16 235 16 
+draw_polygon 4 281 247 303 247 303 16 281 16 
+draw_polygon 4 327 390 349 390 349 16 327 16 
+draw_polygon 4 373 478 395 478 395 16 373 16 
+draw_polygon 4 419 478 441 478 441 16 419 16 
+draw_polygon 4 465 478 487 478 487 16 465 16 
