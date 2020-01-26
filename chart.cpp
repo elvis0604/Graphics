@@ -13,7 +13,9 @@ void Option()
 	string option, data, filename;
     vector<int> vec;
 
-	int space = 46;	//space in between data point
+    int maxScreenSize = 500;
+    int offset = 4;
+	int space = 46;	//space in between data point original: 46
 	int n = 0; //n number of data point
 
 	cout << "What type of chart do you want to generate?" << endl;
@@ -37,6 +39,9 @@ void Option()
         n++;
         vec.push_back(stoi(data));
     }
+
+	space = (maxScreenSize / n) - offset;
+	cout << "Space between point = " << space << endl;
 
 	if(option == "point")
 	{

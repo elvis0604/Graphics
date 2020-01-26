@@ -1,34 +1,46 @@
 set_color 1 1 1
 draw_line 1 10 16 484 16
-draw_line 1 10 62 484 62
-draw_line 1 10 108 484 108
-draw_line 1 10 154 484 154
-draw_line 1 10 200 484 200
-draw_line 1 10 246 484 246
-draw_line 1 10 292 484 292
-draw_line 1 10 338 484 338
-draw_line 1 10 384 484 384
-draw_line 1 10 430 484 430
-draw_line 1 10 476 484 476
-draw_line 1 16 10 16 16
-draw_line 1 62 10 62 16
-draw_line 1 108 10 108 16
-draw_line 1 154 10 154 16
-draw_line 1 200 10 200 16
-draw_line 1 246 10 246 16
-draw_line 1 292 10 292 16
-draw_line 1 338 10 338 16
-draw_line 1 384 10 384 16
-draw_line 1 430 10 430 16
-draw_line 1 476 10 476 16
+draw_line 1 10 47 484 47
+draw_line 1 10 78 484 78
+draw_line 1 10 109 484 109
+draw_line 1 10 140 484 140
+draw_line 1 10 171 484 171
+draw_line 1 10 202 484 202
+draw_line 1 10 233 484 233
+draw_line 1 10 264 484 264
+draw_line 1 10 295 484 295
+draw_line 1 10 326 484 326
+draw_line 1 10 357 484 357
+draw_line 1 10 388 484 388
+draw_line 1 10 419 484 419
+draw_line 1 10 450 484 450
+draw_line 1 16 10 16 484
+draw_line 1 47 10 47 16
+draw_line 1 78 10 78 16
+draw_line 1 109 10 109 16
+draw_line 1 140 10 140 16
+draw_line 1 171 10 171 16
+draw_line 1 202 10 202 16
+draw_line 1 233 10 233 16
+draw_line 1 264 10 264 16
+draw_line 1 295 10 295 16
+draw_line 1 326 10 326 16
+draw_line 1 357 10 357 16
+draw_line 1 388 10 388 16
+draw_line 1 419 10 419 16
+draw_line 1 450 10 450 16
 set_color 1 0 0
-draw_polygon 4 51 38 73 38 73 16 51 16 
-draw_polygon 4 97 49 119 49 119 16 97 16 
-draw_polygon 4 143 71 165 71 165 16 143 16 
-draw_polygon 4 189 104 211 104 211 16 189 16 
-draw_polygon 4 235 159 257 159 257 16 235 16 
-draw_polygon 4 281 247 303 247 303 16 281 16 
-draw_polygon 4 327 390 349 390 349 16 327 16 
-draw_polygon 4 373 478 395 478 395 16 373 16 
-draw_polygon 4 419 478 441 478 441 16 419 16 
-draw_polygon 4 465 478 487 478 487 16 465 16 
+draw_polygon 4 36 26 58 26 58 16 36 16 
+draw_polygon 4 67 32 89 32 89 16 67 16 
+draw_polygon 4 98 43 120 43 120 16 98 16 
+draw_polygon 4 129 59 151 59 151 16 129 16 
+draw_polygon 4 160 86 182 86 182 16 160 16 
+draw_polygon 4 191 130 213 130 213 16 191 16 
+draw_polygon 4 222 201 244 201 244 16 222 16 
+draw_polygon 4 253 244 275 244 275 16 253 16 
+draw_polygon 4 284 244 306 244 306 16 284 16 
+draw_polygon 4 315 261 337 261 337 16 315 16 
+draw_polygon 4 346 272 368 272 368 16 346 16 
+draw_polygon 4 377 288 399 288 399 16 377 16 
+draw_polygon 4 408 315 430 315 430 16 408 16 
+draw_polygon 4 439 452 461 452 461 16 439 16 
