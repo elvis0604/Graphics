@@ -76,6 +76,26 @@ void Option()
 		ofile.close();
 		return ;
 	}
+	else if(option == "all")
+	{
+		ofstream ofilePoint(path + "point.txt");
+		ChartFormatPoint(n, space, vec, ofilePoint);
+		cout << "point.txt generated" << endl;
+		ofilePoint.close();
+		ofstream ofileLine(path + "line.txt");
+		ChartFormatLine(n, space, vec, ofileLine);
+		cout << "line.txt generated" << endl;
+		ofileLine.close();
+		ofstream ofileColumn(path + "column.txt");
+		ChartFormatColumn(n, space, vec, ofileColumn);
+		cout << "column.txt generated" << endl;
+		ofileColumn.close();
+		ofstream ofileArea(path + "area.txt");
+		ChartFormatArea(n, space, vec, ofileArea);
+		cout << "area.txt generated" << endl;
+		ofileArea.close();
+		return ;
+	}
 	else
 		cout << "Cannot find that type of chart. Please restart the application." << endl;
 
