@@ -12,6 +12,7 @@ void Option()
 	ifstream ifile;
 	string option, data, filename;
     vector<int> vec;
+    string path = "../openGLchart/";
 
     int maxScreenSize = 500;
     int offset = 4;
@@ -45,7 +46,7 @@ void Option()
 
 	if(option == "point")
 	{
-		ofstream ofile("point.txt");
+		ofstream ofile(path + "point.txt");
 		ChartFormatPoint(n, space, vec, ofile);
 		cout << "point.txt generated" << endl;
 		ofile.close();
@@ -53,7 +54,7 @@ void Option()
 	}
 	else if(option == "line")
 	{
-		ofstream ofile("line.txt");
+		ofstream ofile(path + "line.txt");
 		ChartFormatLine(n, space, vec, ofile);
 		cout << "line.txt generated" << endl;
 		ofile.close();
@@ -61,7 +62,7 @@ void Option()
 	}
 	else if(option == "column")
 	{
-		ofstream ofile("column.txt");
+		ofstream ofile(path + "column.txt");
 		ChartFormatColumn(n, space, vec, ofile);
 		cout << "column.txt generated" << endl;
 		ofile.close();
@@ -69,7 +70,7 @@ void Option()
 	}
 	else if(option == "area")
 	{
-		ofstream ofile("area.txt");
+		ofstream ofile(path + "area.txt");
 		ChartFormatArea(n, space, vec, ofile);
 		cout << "area.txt generated" << endl;
 		ofile.close();
