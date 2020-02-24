@@ -22,12 +22,11 @@ int ANGLE = 10;
 float SIZE = 500;
 float SCREENSIZEX = SIZE;
 float SCREENSIZEY = SIZE;
-float GRAVITY = 0.3;
-float SPEED = 0.1;
+float GRAVITY = 0.1;
 float VELX = 0, VELY = 0;
+float SPEED = 0;
+float MAXDISTANCE = 0;
 
-bool shoot_to_right = false;
-bool none = false;
 bool MOUSEHOLD = true;
 
 Direction dir = neither;
@@ -48,6 +47,8 @@ void init()
 	glOrtho(MINVIEWX, MAXVIEWX,
 			MINVIEWY, MAXVIEWY,
 			MINVIEWZ, MAXVIEWZ);
+	//Calculate max distance we can get from our view
+	MAXDISTANCE = sqrt(pow(MAXVIEWX - MINVIEWX, 2) + pow(MAXVIEWY - MINVIEWY, 2));
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -84,13 +85,13 @@ void mouse(int button, int state, int x, int y)
 {
 	if (state == GLUT_DOWN)
 	{
-		cout << "x: " << x << " y: " << y << endl;
+		//cout << "x: " << x << " y: " << y << endl;
 		mousex = ((x / SCREENSIZEX) * (MAXVIEWX - MINVIEWX)) + MINVIEWX;
 		mousey = ((y / SCREENSIZEY) * (MINVIEWY - MAXVIEWY)) + MAXVIEWY;
 		cout << "mouse x ini: " << mousex << " mouse y ini: " << mousey << endl;
 
 		//Reset the cube
-		VELX = 0, VELY = 0;
+		VELX = 0, VELY = 0, SPEED = 0;
 		bounce = nobounce;
 		dir = neither;
 
@@ -99,12 +100,18 @@ void mouse(int button, int state, int x, int y)
 
 	if (state == GLUT_UP)
 	{
-		cout << "x: " << x << " y: " << y << endl;
+		//cout << "x: " << x << " y: " << y << endl;
 		mousex_final = ((x / SCREENSIZEX) * (MAXVIEWX - MINVIEWX)) + MINVIEWX;
 		mousey_final = ((y / SCREENSIZEY) * (MINVIEWY - MAXVIEWY)) + MAXVIEWY;
 		cout << "mouse x final: " << mousex_final << " mouse y final: " << mousey_final << endl;
 
 		MOUSEHOLD = false;
+
+		float distance = sqrt(pow(mousex_final - mousex, 2) + pow(mousey_final - mousey, 2));
+		SPEED = (distance / MAXDISTANCE);	//Calculate speed depending on how far apart your mouse click is
+		cout << "distance: " << distance << endl;
+		cout << "max distance: " << MAXDISTANCE << endl;
+		cout << "speed: " << SPEED << endl;
 
 		//Hacky check if we are shooting left or right
 		if(mousex > mousex_final) //Shooting to the left side
@@ -134,8 +141,8 @@ void idle()
 		float theta = 0;
 		theta = atan ((mousey - mousey_final) / (mousex - mousex_final));	//Calculate angle for velocity
 
-		VELX = cos(theta);
-		VELY = sin(theta);
+		VELX = cos(theta) * SPEED;
+		VELY = sin(theta) * SPEED;
 	}
 
 	if(MOUSEHOLD == false)
