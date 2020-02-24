@@ -16,13 +16,13 @@ enum Bounce { bounceleft, bounceright, nobounce };
 float size = 7.5;
 float mousex = 50, mousey = 50, mousez = 50;
 float mousex_final = 0, mousey_final = 0;
-float step = 0.2;
+float step = 0.7;
 
 int ANGLE = 10;
 float SIZE = 500;
 float SCREENSIZEX = SIZE;
 float SCREENSIZEY = SIZE;
-float GRAVITY = 0.5;
+float GRAVITY = 0.3;
 float SPEED = 0.1;
 float VELX = 0, VELY = 0;
 
@@ -67,7 +67,7 @@ void Draw(int argc, char *argv[])
 	glutInitDisplayMode(GLUT_SINGLE|GLUT_RGB);
 	glutInitWindowSize(SCREENSIZEX, SCREENSIZEY);
 	glutInitWindowPosition(250, 250);
-	glutCreateWindow("Chart");
+	glutCreateWindow("ANGRY BRICK");
 
 	glutDisplayFunc(display);
 	glutMouseFunc(mouse);
@@ -92,6 +92,7 @@ void mouse(int button, int state, int x, int y)
 		//Reset the cube
 		VELX = 0, VELY = 0;
 		bounce = nobounce;
+		dir = neither;
 
 		MOUSEHOLD = true;
 	}
@@ -156,12 +157,14 @@ void idle()
 	{
 		mousex = MAXVIEWX;
 		VELX *= -step;
+		VELY *= -step;
 		bounce = bounceright;
 	}//Leftside bounce
 	if (mousex < MINVIEWX)
 	{
 		mousex = MINVIEWX;
 		VELX *= -step;
+		VELY *= -step;
 		bounce = bounceleft;
 	}
 
