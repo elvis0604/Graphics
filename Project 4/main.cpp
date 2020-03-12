@@ -34,7 +34,7 @@ int mode = ROTATE;
 // Material properties
 float Ka = 0.4;
 float Kd = 0.4;
-float Ks = 0.4;
+float Ks = 0.7;
 float Kp = 0.5;
 
 // Surface variables
@@ -135,10 +135,11 @@ void init_color(ifstream& ifile)
 			R[i][j] = stof(red) / COLORSCALE;
 			G[i][j] = stof(green) / COLORSCALE;
 			B[i][j] = stof(blue) / COLORSCALE;
-
+			/*
 			cout << "Storing R " << R[i][j] << endl;
 			cout << "Storing G " << G[i][j] << endl;
 			cout << "Storing B " << B[i][j] << endl;
+			*/
 		}
 }
 
@@ -189,11 +190,10 @@ void init()
    glOrtho(-radius, radius, -radius, radius, -radius, radius);
    glEnable(GL_DEPTH_TEST);
 
-   // Initialize smooth shading
-
    // Initialize surface
    init_surface(ifiledepth, -1.0, 1.0, -1.0, 1.0);
    init_color(ifilecolor);
+   init_normals();
 }
 
 //---------------------------------------
@@ -210,22 +210,15 @@ void display()
    glRotatef(yangle, 0.0, 1.0, 0.0);
    glRotatef(zangle, 0.0, 0.0, 1.0);
 
-   // Initialize material properties
-   init_material(Ka, Kd, Ks, 100 * Kp, 0.6, 0.4, 0.8);
-
 	// Draw the surface LINESCALE is to make draw less line
 	int i, j;
 	for (i = 0; i < SIZE; i+=LINESCALE)
 		for (j = 0; j < SIZE; j+=LINESCALE)
 		{
 			glBegin(GL_LINE_LOOP);
-			glNormal3f(Nx[i][j], Ny[i][j], Nz[i][j]);
 			glVertex3f(Px[i][j], Py[i][j], Pz[i][j]) ;
-			glNormal3f(Nx[i + 1][j], Ny[i + 1][j], Nz[i + 1][j]);
 			glVertex3f(Px[i + 1][j], Py[i + 1][j], Pz[i + 1][j]);
-			glNormal3f(Nx[i + 1][j + 1], Ny[i + 1][j + 1], Nz[i + 1][j + 1]);
 			glVertex3f(Px[i + 1][j + 1], Py[i + 1][j + 1], Pz[i + 1][j + 1]);
-			glNormal3f(Nx[i][j + 1], Ny[i][j + 1], Nz[i][j + 1]);
 			glVertex3f(Px[i][j + 1], Py[i][j + 1], Pz[i][j + 1]);
 			glEnd();
 		}
@@ -259,6 +252,45 @@ void color_display()
 			glColor3f(R[i + 1][j + 1], G[i + 1][j + 1], B[i + 1][j + 1]);
 			glVertex3f(Px[i + 1][j + 1], Py[i + 1][j + 1], Pz[i + 1][j + 1]);
 			glColor3f(R[i][j + 1], G[i][j + 1], B[i][j + 1]);
+			glVertex3f(Px[i][j + 1], Py[i][j + 1], Pz[i][j + 1]);
+			glEnd();
+		}
+	glFlush();
+}
+
+//---------------------------------------
+// Display for PHONG
+//---------------------------------------
+void phong_display()
+{
+	// Incrementally rotate objects
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glTranslatef(xpos / 500.0, ypos / 500.0, zpos / 500.0);
+	glRotatef(xangle, 1.0, 0.0, 0.0);
+	glRotatef(yangle, 0.0, 1.0, 0.0);
+	glRotatef(zangle, 0.0, 0.0, 1.0);
+
+	// Initialize smooth shading
+	glShadeModel(GL_SMOOTH);
+	init_light(GL_LIGHT0, 1, 1, 1, 1, 1, 1);
+
+	// Initialize material properties
+	init_material(Ka, Kd, Ks, 100 * Kp, 1, 0.63, 0.4);
+
+	int i, j;
+	for (i = 0; i < SIZE; i++)
+		for (j = 0; j < SIZE; j++)
+		{
+			glBegin(GL_LINE_LOOP);
+			glNormal3f(Nx[i][j], Ny[i][j], Nz[i][j]);
+			glVertex3f(Px[i][j], Py[i][j], Pz[i][j]) ;
+			glNormal3f(Nx[i + 1][j], Ny[i + 1][j], Nz[i + 1][j]);
+			glVertex3f(Px[i + 1][j], Py[i + 1][j], Pz[i + 1][j]);
+			glNormal3f(Nx[i + 1][j + 1], Ny[i + 1][j + 1], Nz[i + 1][j + 1]);
+			glVertex3f(Px[i + 1][j + 1], Py[i + 1][j + 1], Pz[i + 1][j + 1]);
+			glNormal3f(Nx[i][j + 1], Ny[i][j + 1], Nz[i][j + 1]);
 			glVertex3f(Px[i][j + 1], Py[i][j + 1], Pz[i][j + 1]);
 			glEnd();
 		}
@@ -300,6 +332,7 @@ void keyboard(unsigned char key, int x, int y)
    {
       printf("Type 1 2 3 to change to WIREFRAME, RGB or PHONG mode.\n");
       cout << "IN PHONG MODE" << endl;
+      glutDisplayFunc(phong_display);
    }
 
    // Handle ROTATE
