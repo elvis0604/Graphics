@@ -23,9 +23,9 @@ using namespace std;
 
 ifstream ifiledepth;
 ifstream ifilecolor;
-int xangle = 0;
+int xangle = 45;
 int yangle = 0;
-int zangle = 0;
+int zangle = -90;
 int xpos = 0;
 int ypos = 0;
 int zpos = 0;
@@ -38,7 +38,7 @@ float Ks = 0.7;
 float Kp = 0.5;
 
 // Surface variables
-#define SIZE 500
+#define SIZE 499
 #define DEPTHSCALE 2
 #define LINESCALE 5
 #define COLORSCALE 255
@@ -109,7 +109,7 @@ void init_surface(ifstream& ifile, float Xmin, float Xmax, float Ymin, float Yma
 		{
 			ifile >> depth;
 			// Storing points
-			Px[i][j] = Xmin + i * (Xmax - Xmin) / SIZE;
+			Px[i][j] = Xmin + i * (Xmax - Xmin) / SIZE; //interpolate
 			Py[i][j] = Ymin + j * (Ymax - Ymin) / SIZE;
 			Pz[i][j] = (stof(depth) / SIZE) / DEPTHSCALE;
 
@@ -135,11 +135,10 @@ void init_color(ifstream& ifile)
 			R[i][j] = stof(red) / COLORSCALE;
 			G[i][j] = stof(green) / COLORSCALE;
 			B[i][j] = stof(blue) / COLORSCALE;
-			/*
-			cout << "Storing R " << R[i][j] << endl;
+
+			/*cout << "Storing R " << R[i][j] << endl;
 			cout << "Storing G " << G[i][j] << endl;
-			cout << "Storing B " << B[i][j] << endl;
-			*/
+			cout << "Storing B " << B[i][j] << endl;*/
 		}
 }
 
@@ -149,8 +148,8 @@ void init_color(ifstream& ifile)
 void init_normals()
 {
    // Initialize surface normals
-   for (int i=0; i<=SIZE; i++)
-	   for (int j=0; j<=SIZE; j++)
+   for (int i=0; i<SIZE; i++)
+	   for (int j=0; j<SIZE; j++)
 	   {
 		  // Get tangents S and T
 		  float Sx = (i<SIZE) ? Px[i+1][j] - Px[i][j] : Px[i][j] - Px[i-1][j];
@@ -320,12 +319,14 @@ void keyboard(unsigned char key, int x, int y)
    {
       printf("Type 1 2 3 to change to WIREFRAME, RGB or PHONG mode.\n");
 	  cout << "IN WIREFRAME MODE" << endl;
+      glDisable(GL_LIGHTING);
       glutDisplayFunc(display);
    }
    else if ((key == '2'))
    {
       printf("Type 1 2 3 to change to WIREFRAME, RGB or PHONG mode.\n");
       cout << "IN RGB MODE" << endl;
+      glDisable(GL_LIGHTING);
       glutDisplayFunc(color_display);
    }
    else if ((key == '3'))
@@ -402,25 +403,24 @@ void keyboard(unsigned char key, int x, int y)
 //---------------------------------------
 int main(int argc, char *argv[])
 {
-	string data;
 	string depth_file = "penny-depth.txt";
 	string color_file = "penny-image.txt";
 	// Open output file
 	ifiledepth.open(depth_file);
 	ifilecolor.open(color_file);
 
-   // Create OpenGL window
-   glutInit(&argc, argv);
-   glutInitWindowSize(500, 500);
-   glutInitWindowPosition(250, 250);
-   glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
-   glutCreateWindow("Surface");
-   init();
-   printf("Type r to enter ROTATE mode or t to enter TRANSLATE mode.\n");
+	// Create OpenGL window
+	glutInit(&argc, argv);
+	glutInitWindowSize(500, 500);
+	glutInitWindowPosition(250, 250);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
+	glutCreateWindow("Coin");
+	init();
+	printf("Type r to enter ROTATE mode or t to enter TRANSLATE mode.\n");
 
-   glutDisplayFunc(display);
-   glutKeyboardFunc(keyboard);
-   glutMainLoop();
-   return 0;
+	glutDisplayFunc(display);
+	glutKeyboardFunc(keyboard);
+	glutMainLoop();
+	return 0;
 }
 
