@@ -20,7 +20,7 @@
 // Global variables 
 int xdim, ydim;
 
-const int COUNT = 15;
+const int COUNT = 20;
 const float RADIUS = 0.25;
 
 // array of structs
@@ -99,7 +99,7 @@ void idle()
       if(cube[i].Py < -5)  //Reset the cube to the top with random velocity
       {
          cube[i].Py = random_float((3 + RADIUS), (5 - RADIUS));
-         cube[i].Vy = random_float(-0.01, -0.001);
+         cube[i].Vy = random_float(-0.01, -0.003);
       }
    }
 
@@ -135,10 +135,10 @@ void init()
    {
       //init cube location, velocity, angle
       cube[i].Px = random_float((-2 + RADIUS), (2 - RADIUS));
-      cube[i].Py = random_float((3 + RADIUS), (5 - RADIUS));
-      cube[i].Pz = random_float((-2 + RADIUS), (2 - RADIUS));
+      cube[i].Py = random_float((3 + RADIUS), (10 - RADIUS));
+      cube[i].Pz = random_float((-2 + RADIUS), (2 - RADIUS));  
       cube[i].Vx = 0;
-      cube[i].Vy = random_float(-0.01, -0.001);
+      cube[i].Vy = random_float(-0.01, -0.005);
       cube[i].Vz = 0;
       cube[i].Ax = random_float(0, 45);
       cube[i].Ay = random_float(0, 45);
