@@ -108,13 +108,16 @@ void idle()
 
 void timer(int i)
 {
+   glutPostRedisplay();
+
    for(int i = 0; i < COUNT; i++)
    {
-      cube[i].Ax += cube[i].Ax + 1;
+      cube[i].Ax += 1;
+      cube[i].Ay += random_float(0, 3);
+      cube[i].Az += random_float(0, 3);
    }
 
-   glutPostRedisplay();
-   glutTimerFunc(1000, timer, 0);
+   glutTimerFunc(50, timer, 0);
 }
 
 //---------------------------------------
@@ -136,22 +139,20 @@ void init()
       //init cube location, velocity, angle
       cube[i].Px = random_float((-2 + RADIUS), (2 - RADIUS));
       cube[i].Py = random_float((3 + RADIUS), (10 - RADIUS));
-      cube[i].Pz = random_float((-2 + RADIUS), (2 - RADIUS));  
+      cube[i].Pz = random_float((-20 + RADIUS), (20 - RADIUS));  
       cube[i].Vx = 0;
       cube[i].Vy = random_float(-0.01, -0.005);
       cube[i].Vz = 0;
       cube[i].Ax = random_float(0, 45);
       cube[i].Ay = random_float(0, 45);
-      cube[i].Az = 0;
+      cube[i].Az = random_float(0, 45);
       cube[i].Radius = RADIUS;
       
       //init cube texture using randomize generator
       init_texture((char *)generate_image().c_str(), cube[i].texture, xdim, ydim);
    }
 
-   //init_texture((char *)"cats_dogs/cat0.jpg", texture, xdim, ydim);
    glEnable(GL_TEXTURE_2D);
-   //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, xdim, ydim, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -273,6 +274,7 @@ void display()
       glTranslatef(cube[i].Px, cube[i].Py, cube[i].Pz);
       glRotatef(cube[i].Ax, 1.0, 0.0, 0.0);
       glRotatef(cube[i].Ay, 0.0, 1.0, 0.0);
+      glRotatef(cube[i].Az, 0.0, 0.0, 1.0);
       glTranslatef(-(cube[i].Px), -(cube[i].Py), -(cube[i].Pz));
 
       //Actual draw
